@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for serial, episodes in dict.items %}
+    <div class="titl">
+        {{ serial.name }}:
+    </div>
+    {% for episode in episodes %}
+            <div class="row">
+                <a href="/episode/{{ episode.pk }}/"> {{ episode.name }}</a>
+            </div>
+    {% endfor %}
+    {% endfor %}
+{% endblock content %}

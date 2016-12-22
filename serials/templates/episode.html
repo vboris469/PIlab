@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="title">
+        {{ serial.name }}: {{ episode.name }}
+    </div>
+    {% for link in episode.link_set.all %}
+        <div class="row">
+            <a href="{{ link.link }}">{{ link.link }}</a>
+        </div>
+    {% endfor %}
+    {% if is_watching %}
+    <a href="check/">Отметить как просмотренное</a>
+    {% endif %}
+    <div class="comments">
+        Комментарии:
+        <table>
+            {% for comment in comments %}
+                <tr>
+                    <td>{{ comment.user_name }}:</td>
+                    <td><pre>{{ comment.text }}</pre></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% if request.user.pk %}
+        <form method="post" action="">
+            {% csrf_token %}
+            <textarea name="text" maxlength="500" cols="50" rows="5"></textarea><br/>
+            <input type="submit" value="Комментировать"/>
+        </form>
+    {% endif %}
+{% endblock content %}

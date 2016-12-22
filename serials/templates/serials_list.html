@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for serial in serials %}
+        <div class="row">
+            <a href="/serials/{{ serial.pk }}/"> {{ serial.name }}</a>
+        </div>
+    {% endfor %}
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="title">
+        {{ serial.name }}
+    </div>
+    {% for episode in episodes %}
+            {% ifchanged episode.season %}
+                Сезон {{ episode.season }}:
+                {{ curr_season|add:1 }}
+            {% endifchanged %}
+            <div class="row">
+                <a href="/episode/{{ episode.pk }}/"> {{ episode.name }}</a>
+            </div>
+    {% endfor %}
+{% endblock content %}

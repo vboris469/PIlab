@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Serials</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}?123">
+</head>
+<body>
+    <div class="content container">
+        <div class="menu">
+            <a href="/serials/">Все сериалы</a>
+            {% if request.user.pk %}
+                <a href="/my_serials/">Мои сериалы</a>
+                <a href="/my_episodes/">Новые серии</a>
+            {% endif %}
+            <div class="user">
+                {% if request.user.pk %}
+                    Здравствуйте, {{ request.user.username }}.
+                    <a href="/logout/">Выйти</a>
+                {% else %}
+                    <a href="/login/">Авторизация</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="title">
+        {{ serial.name }}
+    </div>
+    <div>{{ serial.description }}</div>
+    <div><a href="episodes/">Список серий</a></div>
+    {% if request.user.pk and not watching %}
+        <a href="start_watch/">Начать смотреть</a>
+    {% else %}
+        <a href="stop_watch/">Удалить из моих сериалов</a>
+    {% endif %}
+    <div class="comments">
+        Комментарии:
+        <table>
+            {% for comment in comments %}
+                <tr>
+                    <td>{{ comment.user_name }}:</td>
+                    <td><pre>{{ comment.text }}</pre></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% if request.user.pk %}
+        <form method="post" action="">
+            {% csrf_token %}
+            <textarea name="text" maxlength="500" cols="50" rows="5"></textarea><br/>
+            <input type="submit" value="Комментировать"/>
+        </form>
+    {% endif %}
+{% endblock content %}
